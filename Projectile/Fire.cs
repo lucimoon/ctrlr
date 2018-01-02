@@ -11,12 +11,12 @@ namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile
         protected override void Start()
         {
             base.Start();
-            commander.CommandMap.Add(keyCode, this);
+            this.commander.CommandMap.Add(keyCode, this);
         }
 
         public void Execute()
         {
-            controller.Fire();
+            this.controller.Fire();
         }
     }
 }
