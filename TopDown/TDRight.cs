@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr.TopDown
+namespace tardigrage_alpha.Assets.Scripts.Ctrlr
 {
     public class TDRight : TDCommand
     {

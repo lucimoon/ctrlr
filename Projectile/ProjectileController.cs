@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile {
+namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+{
   [RequireComponent(typeof(Fire))]
 
   public class ProjectileController : MonoBehaviour {

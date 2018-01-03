@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile
+namespace tardigrage_alpha.Assets.Scripts.Ctrlr
 {
     public class ProjectileCommand : Command
     {

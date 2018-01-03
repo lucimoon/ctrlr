@@ -60,3 +60,9 @@ Controller instructions:
 Requiring Command in relevant Controller:
 
 `[RequireComponent(typeof(Fire))]`
+
+### Projectiles
+
+*More Soon...*
+
+- Because projectiles collide with and damage health, be sure to assign enemies and players to different layers that do not collide with themselves. Otherwise they may shoot themselves to death.

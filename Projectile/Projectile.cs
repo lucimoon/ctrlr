@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile
+namespace tardigrage_alpha.Assets.Scripts.Ctrlr
 {
   public class Projectile : MonoBehaviour
   {

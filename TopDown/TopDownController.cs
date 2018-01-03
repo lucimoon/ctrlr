@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr.TopDown
+namespace tardigrage_alpha.Assets.Scripts.Ctrlr
 {
   [RequireComponent(typeof(TDDown))]
   [RequireComponent(typeof(TDUp))]

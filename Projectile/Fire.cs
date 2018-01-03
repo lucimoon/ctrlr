@@ -1,13 +1,26 @@
 using UnityEngine;
 using System.Collections;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile
+namespace tardigrage_alpha.Assets.Scripts.Ctrlr
 {
     public class Fire : ProjectileCommand
     {
-        public override void Execute()
-        {
-            this.controller.Fire();
+      [SerializeField]
+      private float rateLimitInSeconds = 0f;
+      private bool allowFire = true;
+
+      public override void Execute()
+      {
+        if (allowFire) {
+          StartCoroutine(LimitedFire());
         }
+      }
+
+      private IEnumerator LimitedFire() {
+          allowFire = false;
+          this.controller.Fire();
+          yield return new WaitForSeconds(rateLimitInSeconds);
+          allowFire = true;
+      }
     }
 }
