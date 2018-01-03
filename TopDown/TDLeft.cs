@@ -3,19 +3,11 @@ using System.Collections;
 
 namespace tardigrage_alpha.Assets.Scripts.Ctrlr.TopDown
 {
-    public class TDLeft : TDCommand, ICommand
+    public class TDLeft : TDCommand
     {
-        private KeyCode defaultKeyCode = KeyCode.A;
-
-        protected override void Start()
+        public override void Execute()
         {
-            base.Start();
-            commander.CommandMap.Add(defaultKeyCode, this);
-        }
-
-        public void Execute()
-        {
-            Debug.Log("Up execution");
+            Debug.Log("Left");
             controller.Move(Direction.left);
         }
     }

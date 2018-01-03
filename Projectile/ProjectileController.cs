@@ -12,7 +12,6 @@ namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile {
     [SerializeField]
     private Projectile projectile;
     private ObjectPool pool;
-    bool INTSTANTIATE_IN_WORLD_SPACE = true;
 
     void Start () {
       if (projectile != null) {
