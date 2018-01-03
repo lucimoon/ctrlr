@@ -23,6 +23,8 @@ namespace tardigrage_alpha.Assets.Scripts.Ctrlr.Projectile {
 
     public void Fire () {
       GameObject currentProjectile = pool.GetPooledObject();
+      if (currentProjectile == null) return;
+
       currentProjectile.transform.position = gameObject.transform.position;
       currentProjectile.transform.rotation = gameObject.transform.rotation;
       currentProjectile.SetActive(true);

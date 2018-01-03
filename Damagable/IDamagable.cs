@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IDamagable {
-	void ReduceHealth (float damage);
+	void Reduce (float damage);
 }
