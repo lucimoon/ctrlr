@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+namespace tardigrage_alpha.Assets.Scripts
 {
   public class Command : MonoBehaviour, ICommand
   {

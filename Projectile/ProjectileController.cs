@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+namespace tardigrage_alpha.Assets.Scripts
 {
   [RequireComponent(typeof(Fire))]
 

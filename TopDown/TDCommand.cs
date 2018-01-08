@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+namespace tardigrage_alpha.Assets.Scripts
 {
   public class TDCommand : Command
   {

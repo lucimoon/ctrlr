@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+namespace tardigrage_alpha.Assets.Scripts
 {
     public interface ICommand
     {

@@ -1,4 +1,4 @@
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+namespace tardigrage_alpha.Assets.Scripts
 {
     public class StraightLine : TDCommand
     {

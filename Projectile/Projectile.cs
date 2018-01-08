@@ -1,11 +1,10 @@
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts.Ctrlr
+namespace tardigrage_alpha.Assets.Scripts
 {
   public class Projectile : MonoBehaviour
   {
     public float speed = 10f;
-    public float damage = 10f;
 
     void OnEnable()
     {
@@ -20,10 +19,6 @@ namespace tardigrage_alpha.Assets.Scripts.Ctrlr
 
     void OnTriggerEnter(Collider otherCollider)
     {
-      Health otherHealth = otherCollider.gameObject.GetComponent<Health>();
-      if (otherHealth == null) return;
-
-      otherHealth.Reduce(damage);
       Deactivate();
     }
 
