@@ -7,10 +7,11 @@ namespace tardigrage_alpha.Assets.Scripts
   [RequireComponent(typeof(TDUp))]
   [RequireComponent(typeof(TDLeft))]
   [RequireComponent(typeof(TDRight))]
+  [RequireComponent(typeof(TDBoss))]
 	public class TopDownController : MonoBehaviour
 	{
     [SerializeField]
-    private Camera mainCamera;
+    protected Camera mainCamera;
 
 		[SerializeField]
 		private float speed = 5f;

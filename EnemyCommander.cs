@@ -7,6 +7,7 @@ namespace tardigrage_alpha.Assets.Scripts
   [RequireComponent(typeof(TDUp))]
   [RequireComponent(typeof(TDLeft))]
   [RequireComponent(typeof(TDRight))]
+  [RequireComponent(typeof(TDBoss))]
   public class EnemyCommander : MonoBehaviour
   {
     public enum EnemyCommand {
@@ -14,6 +15,7 @@ namespace tardigrage_alpha.Assets.Scripts
       down,
       left,
       right,
+      boss,
       fire
     }
     public Dictionary<EnemyCommand, ICommand> CommandMap = new Dictionary<EnemyCommand, ICommand>();
@@ -27,6 +29,7 @@ namespace tardigrage_alpha.Assets.Scripts
       CommandMap.Add(EnemyCommand.up, GetComponent<TDUp>());
       CommandMap.Add(EnemyCommand.right, GetComponent<TDRight>());
       CommandMap.Add(EnemyCommand.fire, GetComponentsInChildren<Fire>()[0]);
+      CommandMap.Add(EnemyCommand.boss, GetComponent<TDBoss>());
     }
 
     void Update()
