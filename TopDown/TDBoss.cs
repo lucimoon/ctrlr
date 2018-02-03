@@ -32,8 +32,6 @@ namespace tardigrage_alpha.Assets.Scripts
 
       if (bossPosition.x < 0.9f) inPosition = true;
 
-      Debug.Log("bossPosition.x : " + bossPosition.x );
-      Debug.Log("inPosition: " + inPosition);
       return inPosition;
     }
   }

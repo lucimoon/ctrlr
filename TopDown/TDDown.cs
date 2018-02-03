@@ -7,7 +7,6 @@ namespace tardigrage_alpha.Assets.Scripts
     {
       public override void Execute()
       {
-        Debug.Log("Down");
         controller.Move(Direction.down);
       }
     }

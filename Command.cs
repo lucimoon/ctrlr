@@ -17,7 +17,6 @@ namespace tardigrage_alpha.Assets.Scripts
     {
       GameObject input = GameObject.Find("DesktopInput");
       if (input != null) {
-        Debug.Log("Input found.");
         commander = input.GetComponent<DesktopCommander>();
       } else {
         Debug.LogWarning("No input component found.");
