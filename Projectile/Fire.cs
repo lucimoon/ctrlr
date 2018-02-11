@@ -26,6 +26,7 @@ namespace tardigrage_alpha.Assets.Scripts
 
     private IEnumerator LimitedFire() {
       allowFire = false;
+      this.FireEvent();
       this.controller.Fire();
 
       if (burstLimit > 0) {

@@ -10,6 +10,8 @@ namespace tardigrage_alpha.Assets.Scripts
     private bool eventDriven = false;
     [SerializeField]
     private string eventTrigger = null;
+    [SerializeField]
+    private string eventToFire = null;
 
     protected DesktopCommander commander;
     protected virtual void Start ()
@@ -44,7 +46,16 @@ namespace tardigrage_alpha.Assets.Scripts
         commander.CommandMap.Add(keyCode, this);
       }
     }
+
     public virtual void Execute() {}
+
+    protected string FireEvent () {
+      if (eventToFire == null) return null;
+
+      Debug.Log(eventToFire);
+      EventManager.TriggerEvent(eventToFire);
+      return eventToFire;
+    }
 
     private void StartListening ()
     {
