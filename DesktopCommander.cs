@@ -5,7 +5,9 @@ namespace tardigrage_alpha.Assets.Scripts
 {
   public class DesktopCommander : MonoBehaviour
   {
+    public bool inputEnabled = true;
     public Dictionary<KeyCode, ICommand> CommandMap = new Dictionary<KeyCode, ICommand>();
+
     private List<KeyCode> validInputs = new List<KeyCode>(new KeyCode[] {
       KeyCode.A,
       KeyCode.Alpha0,
@@ -332,7 +334,19 @@ namespace tardigrage_alpha.Assets.Scripts
 
     void Update()
     {
-      MapInputToCommand();
+      if (inputEnabled) MapInputToCommand();
+    }
+
+    void OnEnable()
+    {
+      EventManager.StartListening("spawn-start", DisableControls);
+      EventManager.StartListening("spawn-end", EnableControls);
+    }
+
+    void OnDisable()
+    {
+      EventManager.StopListening("spawn-start", DisableControls);
+      EventManager.StopListening("spawn-end", EnableControls);
     }
 
     private void MapInputToCommand()
@@ -349,6 +363,14 @@ namespace tardigrage_alpha.Assets.Scripts
           CommandMap[keyCode].Execute();
         }
       }
+    }
+
+    private void EnableControls () {
+      inputEnabled = true;
+    }
+
+    private void DisableControls () {
+      inputEnabled = false;
     }
   }
 }

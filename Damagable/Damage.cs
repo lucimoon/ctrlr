@@ -11,7 +11,6 @@ namespace tardigrage_alpha.Assets.Scripts
     {
       Health otherHealth = otherCollider.gameObject.GetComponent<Health>();
       if (otherHealth == null) return;
-      Debug.Log(otherHealth);
       otherHealth.Reduce(damage);
     }
 

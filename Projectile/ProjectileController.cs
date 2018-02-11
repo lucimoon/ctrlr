@@ -32,6 +32,7 @@ namespace tardigrage_alpha.Assets.Scripts
 
     private void InitializePool () {
       pool = gameObject.AddComponent<ObjectPool>();
+      pool.autoFillPool = true;
       pool.objectToPool = projectile.gameObject;
       pool.amountToPool = maxProjectiles;
       pool.FillPool();
