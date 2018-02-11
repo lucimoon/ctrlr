@@ -50,10 +50,7 @@ namespace tardigrage_alpha.Assets.Scripts
     public virtual void Execute() {}
 
     protected string FireEvent () {
-      if (eventToFire == null) return null;
-
-      Debug.Log(eventToFire);
-      EventManager.TriggerEvent(eventToFire);
+      if (eventToFire != null) EventManager.TriggerEvent(eventToFire);
       return eventToFire;
     }
 

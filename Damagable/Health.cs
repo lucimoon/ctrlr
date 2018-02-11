@@ -18,6 +18,9 @@ namespace tardigrage_alpha.Assets.Scripts
     private string deathEventName = "life-lost";
 
     [SerializeField]
+    private string damageEventName = "hit";
+
+    [SerializeField]
     private Slider healthSlider;
     private Color originalColor;
     private Renderer objectRenderer;
@@ -35,6 +38,8 @@ namespace tardigrage_alpha.Assets.Scripts
     }
 
     public void Reduce(float damage) {
+      EventManager.TriggerEvent(damageEventName);
+
       health -= Mathf.Abs(damage);
       UpdateUI();
 
