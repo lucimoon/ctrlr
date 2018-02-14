@@ -6,10 +6,10 @@ namespace tardigrage_alpha.Assets.Scripts
   {
     public float speed = 10f;
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
       Rigidbody objectRigidbody = transform.GetComponent<Rigidbody>();
-      objectRigidbody.velocity = transform.up * speed;
+      objectRigidbody.velocity = transform.forward * speed;
     }
 
     void OnBecameInvisible()
@@ -17,7 +17,7 @@ namespace tardigrage_alpha.Assets.Scripts
       Deactivate();
     }
 
-    void OnTriggerEnter(Collider otherCollider)
+    void OnCollisionEnter(Collision collisionInfo)
     {
       Deactivate();
     }

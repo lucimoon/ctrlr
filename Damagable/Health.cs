@@ -22,6 +22,8 @@ namespace tardigrage_alpha.Assets.Scripts
 
     [SerializeField]
     private Slider healthSlider;
+    [SerializeField]
+    private Text lifeCounter;
     private Color originalColor;
     private Renderer objectRenderer;
     private Color damageColor;
@@ -41,7 +43,6 @@ namespace tardigrage_alpha.Assets.Scripts
       EventManager.TriggerEvent(damageEventName);
 
       health -= Mathf.Abs(damage);
-      UpdateUI();
 
       if (health <= 0f)
       {
@@ -51,6 +52,7 @@ namespace tardigrage_alpha.Assets.Scripts
       {
         StartCoroutine(AnimateDamage());
       }
+      UpdateUI();
     }
 
     private void Kill ()
@@ -74,6 +76,10 @@ namespace tardigrage_alpha.Assets.Scripts
       if (healthSlider != null)
       {
         healthSlider.value = health;
+      }
+      if (lifeCounter != null)
+      {
+        lifeCounter.text = $"x{lives}";
       }
     }
 

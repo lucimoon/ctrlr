@@ -7,9 +7,9 @@ namespace tardigrage_alpha.Assets.Scripts
     [SerializeField]
     private float damage = 10f;
 
-    void OnTriggerEnter(Collider otherCollider)
+    void OnCollisionEnter(Collision collision)
     {
-      Health otherHealth = otherCollider.gameObject.GetComponent<Health>();
+      Health otherHealth = collision.gameObject.GetComponent<Health>();
       if (otherHealth == null) return;
       otherHealth.Reduce(damage);
     }
