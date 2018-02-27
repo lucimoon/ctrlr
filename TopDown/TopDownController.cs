@@ -29,6 +29,9 @@ namespace tardigrage_alpha.Assets.Scripts
     [SerializeField]
     private bool keepWithinBounds = false;
 
+    [SerializeField]
+    private bool destroyOnDeath = false;
+
     private float distanceFromCamera;
     private Dictionary<Direction, Vector3> directionMap = new Dictionary<Direction, Vector3>
     {
@@ -45,7 +48,7 @@ namespace tardigrage_alpha.Assets.Scripts
     }
 
     public void Move (Direction direction) {
-      bool withinBounds = GetWithinBounds(direction);
+      bool withinBounds = isWithinBounds(direction);
 
       if (directionMap.ContainsKey(direction) && withinBounds) {
         Vector3 vector = directionMap[direction] * speed * Time.deltaTime;
@@ -53,7 +56,7 @@ namespace tardigrage_alpha.Assets.Scripts
       }
     }
 
-    private bool GetWithinBounds(Direction direction) {
+    private bool isWithinBounds(Direction direction) {
       bool withinBounds = true;
 
       if (!keepWithinBounds) return withinBounds;
@@ -95,7 +98,15 @@ namespace tardigrage_alpha.Assets.Scripts
     public void Die()
     {
       Splash();
-      gameObject.SetActive(false);
+
+      if (destroyOnDeath)
+      {
+        Destroy(gameObject);
+      }
+      else
+      {
+        gameObject.SetActive(false);
+      }
     }
 
     private IEnumerator StartSequence()

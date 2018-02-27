@@ -61,7 +61,6 @@ namespace tardigrage_alpha.Assets.Scripts
 
       if (controller != null)
       {
-        Debug.Log(lives);
         controller.Die();
       }
       else
