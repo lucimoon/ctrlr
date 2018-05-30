@@ -1,69 +1,66 @@
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts
+public class Command : MonoBehaviour, ICommand
 {
-  public class Command : MonoBehaviour, ICommand
+  [SerializeField]
+  private KeyCode keyCode = KeyCode.None;
+  [SerializeField]
+  private bool eventDriven = false;
+  [SerializeField]
+  private string eventTrigger = null;
+  [SerializeField]
+  private string eventToFire = null;
+
+  protected DesktopCommander commander;
+  protected virtual void Start ()
   {
-    [SerializeField]
-    private KeyCode keyCode = KeyCode.None;
-    [SerializeField]
-    private bool eventDriven = false;
-    [SerializeField]
-    private string eventTrigger = null;
-    [SerializeField]
-    private string eventToFire = null;
+    FindInput();
+    MapKeyCode();
+  }
 
-    protected DesktopCommander commander;
-    protected virtual void Start ()
-    {
-      FindInput();
-      MapKeyCode();
+  void Awake()
+  {
+    StartListening();
+  }
+
+  void OnDestroy()
+  {
+    StopListenting();
+  }
+
+  private void FindInput()
+  {
+    GameObject input = GameObject.Find("Input");
+    if (input != null) {
+      commander = input.GetComponent<DesktopCommander>();
+    } else {
+      Debug.LogWarning("No input component found.");
     }
+  }
 
-    void Awake()
-    {
-      StartListening();
+  private void MapKeyCode ()
+  {
+    if (keyCode != KeyCode.None) {
+      commander.CommandMap.Add(keyCode, this);
     }
+  }
 
-    void OnDestroy()
-    {
-      StopListenting();
-    }
+  public virtual void Execute() {}
 
-    private void FindInput()
-    {
-      GameObject input = GameObject.Find("Input");
-      if (input != null) {
-        commander = input.GetComponent<DesktopCommander>();
-      } else {
-        Debug.LogWarning("No input component found.");
-      }
-    }
+  protected string FireEvent () {
+    if (eventToFire != null) EventManager.TriggerEvent(eventToFire);
+    return eventToFire;
+  }
 
-    private void MapKeyCode ()
-    {
-      if (keyCode != KeyCode.None) {
-        commander.CommandMap.Add(keyCode, this);
-      }
-    }
+  private void StartListening ()
+  {
+    if (eventDriven && eventTrigger != null) EventManager.StartListening(eventTrigger, Execute);
+  }
 
-    public virtual void Execute() {}
-
-    protected string FireEvent () {
-      if (eventToFire != null) EventManager.TriggerEvent(eventToFire);
-      return eventToFire;
-    }
-
-    private void StartListening ()
-    {
-      if (eventDriven && eventTrigger != null) EventManager.StartListening(eventTrigger, Execute);
-    }
-
-    private void StopListenting ()
-    {
-      if (eventDriven && eventTrigger != null) {
-        EventManager.StopListening(eventTrigger, Execute);
-      }
+  private void StopListenting ()
+  {
+    if (eventDriven && eventTrigger != null) {
+      EventManager.StopListening(eventTrigger, Execute);
     }
   }
 }

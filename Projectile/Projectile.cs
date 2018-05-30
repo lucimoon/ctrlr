@@ -1,29 +1,26 @@
 using UnityEngine;
 
-namespace tardigrage_alpha.Assets.Scripts
+public class Projectile : MonoBehaviour
 {
-  public class Projectile : MonoBehaviour
+  public float speed = 10f;
+
+  protected virtual void OnEnable()
   {
-    public float speed = 10f;
+    Rigidbody objectRigidbody = transform.GetComponent<Rigidbody>();
+    objectRigidbody.velocity = transform.forward * speed;
+  }
 
-    protected virtual void OnEnable()
-    {
-      Rigidbody objectRigidbody = transform.GetComponent<Rigidbody>();
-      objectRigidbody.velocity = transform.forward * speed;
-    }
+  void OnBecameInvisible()
+  {
+    Deactivate();
+  }
 
-    void OnBecameInvisible()
-    {
-      Deactivate();
-    }
+  void OnCollisionEnter(Collision collisionInfo)
+  {
+    Deactivate();
+  }
 
-    void OnCollisionEnter(Collision collisionInfo)
-    {
-      Deactivate();
-    }
-
-    private void Deactivate() {
-      gameObject.SetActive(false);
-    }
+  private void Deactivate() {
+    gameObject.SetActive(false);
   }
 }

@@ -78,7 +78,7 @@ namespace tardigrage_alpha.Assets.Scripts
       }
       if (lifeCounter != null)
       {
-        lifeCounter.text = $"x{lives}";
+        lifeCounter.text = "x" + lives;
       }
     }
 
