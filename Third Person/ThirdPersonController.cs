@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(ThirdPersonBackward))]
 [RequireComponent(typeof(ThirdPersonForward))]
 [RequireComponent(typeof(ThirdPersonLeft))]
@@ -9,20 +10,44 @@ using System.Collections.Generic;
 public class ThirdPersonController : MonoBehaviour
 {
   [SerializeField]
-  private float speed = 10f;
+  private float movementSpeed = 10f;
+  [SerializeField]
+  private float rotationSpeed = 20f;
 
-  private Dictionary<Direction, Vector3> directionMap = new Dictionary<Direction, Vector3>
-  {
-    {Direction.forward, Vector3.forward},
-    {Direction.backward, Vector3.back},
-    {Direction.left, Vector3.left},
-    {Direction.right, Vector3.right},
-  };
+  private Dictionary<Direction, Vector3> directionMap;
+  private CharacterController controller;
+  private Vector3 leftRotation;
+  private Vector3 rightRotation;
+
+  void Start() {
+    controller = gameObject.GetComponent<CharacterController>();
+    leftRotation = new Vector3(0f, -10f, 0f);
+    rightRotation = new Vector3(0f, 10f, 0f);
+
+    directionMap = new Dictionary<Direction, Vector3>
+    {
+      {Direction.forward, transform.forward},
+      {Direction.backward, -transform.forward},
+      {Direction.left, leftRotation},
+      {Direction.right, rightRotation},
+    };
+  }
 
   public void Move (Direction direction) {
     if (directionMap.ContainsKey(direction)) {
-      Vector3 vector = directionMap[direction] * speed * Time.deltaTime;
-      transform.Translate(vector, Space.World);
+        Vector3 vector = directionMap[direction] * Time.deltaTime;
+
+      if (direction == Direction.forward) {
+        controller.SimpleMove(transform.forward * movementSpeed);
+      }
+
+      if (direction == Direction.backward) {
+        controller.SimpleMove(-transform.forward * movementSpeed);
+      }
+
+      if (direction == Direction.left || direction == Direction.right) {
+        gameObject.transform.Rotate(vector * rotationSpeed);
+      }
     }
   }
 
