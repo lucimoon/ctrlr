@@ -4,13 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(UIToggle))]
 
 public class UIController : MonoBehaviour {
+  private Canvas canvas;
+
+  void Awake() {
+    canvas = GetComponent<Canvas>();
+  }
 
   public void ToggleUI () {
-    if (gameObject.activeInHierarchy) {
-      gameObject.SetActive(false);
-    } else {
-      gameObject.SetActive(true);
-    }
+    canvas.enabled = !canvas.enabled;
   }
 
 }

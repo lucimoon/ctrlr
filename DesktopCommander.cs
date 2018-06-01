@@ -372,7 +372,6 @@ public class DesktopCommander : MonoBehaviour
 
     if (keyActivated) {
       if (CommandMap.ContainsKey(keyCode) && (currentType == CommandMap[keyCode].ActivationType)) {
-        Debug.Log(CommandMap[keyCode]);
         CommandMap[keyCode].Execute();
       }
     }
