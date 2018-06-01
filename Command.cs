@@ -10,6 +10,8 @@ public class Command : MonoBehaviour, ICommand
   private string eventTrigger = null;
   [SerializeField]
   private string eventToFire = null;
+  [SerializeField]
+  private ActivationType activationType = ActivationType.keyPress;
 
   protected DesktopCommander commander;
   protected virtual void Start ()
@@ -28,6 +30,19 @@ public class Command : MonoBehaviour, ICommand
     StopListenting();
   }
 
+  public virtual void Execute() {}
+
+  public ActivationType ActivationType {
+    get {
+      return this.activationType;
+    }
+  }
+
+  protected string FireEvent () {
+    if (eventToFire != null) EventManager.TriggerEvent(eventToFire);
+    return eventToFire;
+  }
+
   private void FindInput()
   {
     GameObject input = GameObject.Find("Input");
@@ -43,13 +58,6 @@ public class Command : MonoBehaviour, ICommand
     if (keyCode != KeyCode.None) {
       commander.CommandMap.Add(keyCode, this);
     }
-  }
-
-  public virtual void Execute() {}
-
-  protected string FireEvent () {
-    if (eventToFire != null) EventManager.TriggerEvent(eventToFire);
-    return eventToFire;
   }
 
   private void StartListening ()

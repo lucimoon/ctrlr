@@ -43,8 +43,8 @@ Setting default KeyCode:
 
   protected override void Start()
   {
-      base.Start();
-      this.commander.CommandMap.Add(keyCode, this);
+    base.Start();
+    this.commander.CommandMap.Add(keyCode, this);
   }
 ```
 

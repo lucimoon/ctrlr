@@ -4,16 +4,9 @@ using System.Collections.Generic;
 public class DesktopCommander : MonoBehaviour
 {
   private delegate bool KeyActivated(KeyCode keyCode);
-  public enum ActivationType {
-    keyDown,
-    keyPress,
-    keyUp,
-  };
-
   public bool inputEnabled = true;
   public Dictionary<KeyCode, ICommand> CommandMap = new Dictionary<KeyCode, ICommand>();
   public ActivationType activationType;
-  private KeyActivated keyActivated;
 
   private List<KeyCode> validInputs = new List<KeyCode>(new KeyCode[] {
     KeyCode.A,
@@ -351,22 +344,6 @@ public class DesktopCommander : MonoBehaviour
     EventManager.StopListening("spawn-end", EnableControls);
   }
 
-  void Start() {
-    Debug.Log(activationType);
-    switch (activationType)
-    {
-      case ActivationType.keyDown:
-        keyActivated = Input.GetKeyDown;
-        break;
-      case ActivationType.keyUp:
-        keyActivated = Input.GetKeyUp;
-        break;
-      default:
-        keyActivated = Input.GetKey;
-        break;
-    }
-  }
-
   void Update()
   {
     if (inputEnabled) MapInputToCommand();
@@ -379,10 +356,23 @@ public class DesktopCommander : MonoBehaviour
 
   private void ExecuteIfAssigned (KeyCode keyCode)
   {
-    // We may need to expose an interface
-    // to easily enable GetKeyDown || GetKeyUp || GetKey
-    if (keyActivated(keyCode)) {
-      if (CommandMap.ContainsKey(keyCode)) {
+    ActivationType currentType = ActivationType.NULL;
+    bool keyActivated = false;
+
+    if (Input.GetKeyDown(keyCode)) {
+      currentType = ActivationType.keyDown;
+      keyActivated = true;
+    } else if (Input.GetKeyUp(keyCode)) {
+      currentType = ActivationType.keyUp;
+      keyActivated = true;
+    } else if (Input.GetKey(keyCode)) {
+      currentType = ActivationType.keyPress;
+      keyActivated = true;
+    }
+
+    if (keyActivated) {
+      if (CommandMap.ContainsKey(keyCode) && (currentType == CommandMap[keyCode].ActivationType)) {
+        Debug.Log(CommandMap[keyCode]);
         CommandMap[keyCode].Execute();
       }
     }
