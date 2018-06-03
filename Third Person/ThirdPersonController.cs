@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(ThirdPersonBackward))]
 [RequireComponent(typeof(ThirdPersonForward))]
 [RequireComponent(typeof(ThirdPersonLeft))]
 [RequireComponent(typeof(ThirdPersonRight))]
+[RequireComponent(typeof(ThirdPersonInteract))]
 public class ThirdPersonController : MonoBehaviour
 {
   [SerializeField]
@@ -18,9 +20,12 @@ public class ThirdPersonController : MonoBehaviour
   private CharacterController controller;
   private Vector3 leftRotation;
   private Vector3 rightRotation;
+  private PlayerState playerState;
 
   void Start() {
-    controller = gameObject.GetComponent<CharacterController>();
+    playerState = GetComponent<PlayerState>();
+    controller = GetComponent<CharacterController>();
+
     leftRotation = new Vector3(0f, -10f, 0f);
     rightRotation = new Vector3(0f, 10f, 0f);
 
@@ -48,6 +53,17 @@ public class ThirdPersonController : MonoBehaviour
       if (direction == Direction.left || direction == Direction.right) {
         gameObject.transform.Rotate(vector * rotationSpeed);
       }
+    }
+  }
+
+  public void Interact () {
+    IInteractable interactable = playerState.interactables.Find(item => {
+      return item != null;
+    });
+
+    if (interactable != null) {
+      playerState.interactables.Remove(interactable);
+      interactable.Action(gameObject);
     }
   }
 
