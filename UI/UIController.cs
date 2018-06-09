@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UIToggle))]
-
 public class UIController : MonoBehaviour {
   private Canvas canvas;
 
@@ -12,6 +10,14 @@ public class UIController : MonoBehaviour {
 
   public void ToggleUI () {
     canvas.enabled = !canvas.enabled;
+  }
+
+  public void EnableUI () {
+    canvas.enabled = true;
+  }
+
+  public void DisableUI () {
+    canvas.enabled = false;
   }
 
 }
