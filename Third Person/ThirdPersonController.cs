@@ -57,14 +57,7 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void Interact () {
-    IInteractable interactable = playerState.interactables.Find(item => {
-      return item != null;
-    });
-
-    if (interactable != null) {
-      playerState.interactables.Remove(interactable);
-      interactable.Action(gameObject);
-    }
+    HandleItemInteraction();
   }
 
   public void Spawn()
@@ -82,5 +75,16 @@ public class ThirdPersonController : MonoBehaviour
   {
     yield return null;
     EventManager.TriggerEvent("spawn-end");
+  }
+
+  private void HandleItemInteraction () {
+    IInteractable interactable = playerState.interactables.Find(item => {
+      return item != null;
+    });
+
+    if (interactable != null) {
+      playerState.interactables.Remove(interactable);
+      interactable.Action(gameObject);
+    }
   }
 }
