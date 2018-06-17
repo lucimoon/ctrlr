@@ -10,5 +10,6 @@ public class ThirdPersonCommand : Command
   {
     base.Start();
     this.controller = GetComponent<ThirdPersonController>();
+    this.disabledOnKeyUp = true;
   }
 }

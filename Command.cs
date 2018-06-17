@@ -3,7 +3,7 @@ using UnityEngine;
 public class Command : MonoBehaviour, ICommand
 {
   [SerializeField]
-  private KeyCode keyCode = KeyCode.None;
+  protected KeyCode keyCode = KeyCode.None;
   [SerializeField]
   private bool eventDriven = false;
   [SerializeField]
@@ -13,12 +13,16 @@ public class Command : MonoBehaviour, ICommand
   [SerializeField]
   private ActivationType activationType = ActivationType.keyPress;
 
+  public bool disabledOnKeyUp = false;
+
   protected DesktopCommander commander;
   protected virtual void Start ()
   {
     FindInput();
     MapKeyCode();
   }
+
+  protected virtual void After () {}
 
   void Awake()
   {
@@ -28,6 +32,14 @@ public class Command : MonoBehaviour, ICommand
   void OnDestroy()
   {
     StopListenting();
+  }
+
+  void Update() {
+    if (disabledOnKeyUp) {
+      if (Input.GetKeyUp(keyCode)) {
+        After();
+      }
+    }
   }
 
   public virtual void Execute() {}

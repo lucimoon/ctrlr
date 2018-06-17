@@ -87,4 +87,9 @@ public class ThirdPersonController : MonoBehaviour
       interactable.Action(gameObject);
     }
   }
+
+  public void UpdateAnimationState(string name, bool value) {
+    playerState.UpdateAnimatorState(name, value);
+  }
 }
+
