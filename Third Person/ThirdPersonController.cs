@@ -15,6 +15,8 @@ public class ThirdPersonController : MonoBehaviour
   private float movementSpeed = 10f;
   [SerializeField]
   private float rotationSpeed = 20f;
+  [SerializeField]
+  private Transform holdTransform;
 
   private Dictionary<Direction, Vector3> directionMap;
   private CharacterController controller;
@@ -60,6 +62,10 @@ public class ThirdPersonController : MonoBehaviour
     HandleItemInteraction();
   }
 
+  public void Hold () {
+    HandleItemHold();
+  }
+
   public void Spawn()
   {
     EventManager.TriggerEvent("spawn-start");
@@ -85,6 +91,25 @@ public class ThirdPersonController : MonoBehaviour
     if (interactable != null) {
       playerState.interactables.Remove(interactable);
       interactable.Action(gameObject);
+    }
+  }
+
+  private void HandleItemHold () {
+    if (holdTransform == null) return;
+    if (playerState.heldObject != null) {
+      IHoldable holdable = playerState.heldObject.GetComponent<IHoldable>();
+      if (holdable != null) holdable.Drop(playerState);
+      return;
+    }
+
+    IInteractable interactable = playerState.interactables.Find(item => {
+      return (item != null) && (item is IHoldable);
+    });
+
+    if (interactable != null) {
+      playerState.interactables.Remove(interactable);
+      IHoldable holdable = (IHoldable)interactable;
+      holdable.Hold(gameObject, holdTransform);
     }
   }
 
