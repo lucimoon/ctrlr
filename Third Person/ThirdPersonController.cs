@@ -59,11 +59,41 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void Interact () {
-    HandleItemInteraction();
+    IInteractable interactable = playerState.interactables.Find(item => {
+      return item != null;
+    });
+
+    if (interactable != null) {
+      if (playerState.interactables.Contains(interactable)) {
+        playerState.interactables.Remove(interactable);
+        interactable.Action(gameObject);
+      }
+    }
   }
 
   public void Hold () {
-    HandleItemHold();
+    if (holdTransform == null) return;
+    if (playerState.heldObject != null) {
+      IHoldable holdable = playerState.heldObject.GetComponent<IHoldable>();
+      if (holdable != null) holdable.Drop(playerState);
+      return;
+    }
+
+    IInteractable interactable = playerState.interactables.Find(item => {
+      return (item != null) && (item is IHoldable);
+    });
+
+    if (interactable != null) {
+      playerState.interactables.Remove(interactable);
+      IHoldable holdable = (IHoldable)interactable;
+      holdable.Hold(gameObject, holdTransform);
+    }
+  }
+
+  public void Emote() {
+    if (playerState.neighbor != null) {
+      playerState.animator.SetTrigger("emote");
+    }
   }
 
   public void Spawn()
@@ -81,36 +111,6 @@ public class ThirdPersonController : MonoBehaviour
   {
     yield return null;
     EventManager.TriggerEvent("spawn-end");
-  }
-
-  private void HandleItemInteraction () {
-    IInteractable interactable = playerState.interactables.Find(item => {
-      return item != null;
-    });
-
-    if (interactable != null) {
-      playerState.interactables.Remove(interactable);
-      interactable.Action(gameObject);
-    }
-  }
-
-  private void HandleItemHold () {
-    if (holdTransform == null) return;
-    if (playerState.heldObject != null) {
-      IHoldable holdable = playerState.heldObject.GetComponent<IHoldable>();
-      if (holdable != null) holdable.Drop(playerState);
-      return;
-    }
-
-    IInteractable interactable = playerState.interactables.Find(item => {
-      return (item != null) && (item is IHoldable);
-    });
-
-    if (interactable != null) {
-      playerState.interactables.Remove(interactable);
-      IHoldable holdable = (IHoldable)interactable;
-      holdable.Hold(gameObject, holdTransform);
-    }
   }
 
   public void UpdateAnimationState(string name, bool value) {
