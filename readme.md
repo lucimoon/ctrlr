@@ -1,22 +1,34 @@
-### Input
+- [Installation](#Installation)
+- [Setup](#Setup)
+- [Input](#Input)
+- [Controllers](#Controllers)
+- [Commands](#Commands)
+- [Projectiles](#Projectiles)
+
+### Installation
+
+- Clone Repo
+- Clone Utils
+
+### Setup
+
+* Create a Commander:
+  * create an empty `GameObject`.
+  * attach the desired `Commander` to the `GameObject`.
+  * TODO: Create a prefab to do this
+
+* Create a Controller:
+  * Attach the controller to the player object,  *i.e. TopDownController*.
+
+### Commanders
 
 Commanders are used to map input to desired commands.
 They keep the input separate from the implementation.
-
-To use a commander:
-  - create an empty GameObject
-  - attach the desired commander to the GameObject
-  - TODO: Create a prefab to do this
 
 ### Controllers
 
 Controllers give controllable behavior to GameObjects.
 Controllers also require the Commands associated with them to be present on GameObject. Unity will add the required Commands for you.
-
-To use a Controller:
-
-  - Attach the controller to the relevant GameObject
-  - *i.e. Attach TopDownController to player.
 
 ### Commands
 
