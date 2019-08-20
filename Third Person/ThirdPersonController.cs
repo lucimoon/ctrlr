@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(ThirdPersonBackward))]
 [RequireComponent(typeof(ThirdPersonForward))]
 [RequireComponent(typeof(ThirdPersonLeft))]
@@ -22,10 +21,8 @@ public class ThirdPersonController : MonoBehaviour
   private CharacterController controller;
   private Vector3 leftRotation;
   private Vector3 rightRotation;
-  private PlayerState playerState;
 
   void Start() {
-    playerState = GetComponent<PlayerState>();
     controller = GetComponent<CharacterController>();
 
     leftRotation = new Vector3(0f, -10f, 0f);
@@ -59,41 +56,13 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void Interact () {
-    IInteractable interactable = playerState.interactables.Find(item => {
-      return item != null;
-    });
 
-    if (interactable != null) {
-      if (playerState.interactables.Contains(interactable)) {
-        playerState.interactables.Remove(interactable);
-        interactable.Action(gameObject);
-      }
-    }
   }
 
   public void Hold () {
-    if (holdTransform == null) return;
-    if (playerState.heldObject != null) {
-      IHoldable holdable = playerState.heldObject.GetComponent<IHoldable>();
-      if (holdable != null) holdable.Drop(playerState);
-      return;
-    }
-
-    IInteractable interactable = playerState.interactables.Find(item => {
-      return (item != null) && (item is IHoldable);
-    });
-
-    if (interactable != null) {
-      playerState.interactables.Remove(interactable);
-      IHoldable holdable = (IHoldable)interactable;
-      holdable.Hold(gameObject, holdTransform);
-    }
   }
 
   public void Emote() {
-    if (playerState.neighbor != null) {
-      playerState.animator.SetTrigger("emote");
-    }
   }
 
   public void Spawn()
@@ -114,7 +83,6 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void UpdateAnimationState(string name, bool value) {
-    playerState.UpdateAnimatorState(name, value);
   }
 }
 
