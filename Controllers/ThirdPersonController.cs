@@ -11,20 +11,20 @@ using System.Collections.Generic;
 public class ThirdPersonController : MonoBehaviour
 {
   [SerializeField]
-  private float movementSpeed = 10f;
+  protected float movementSpeed = 10f;
   [SerializeField]
-  private float rotationSpeed = 20f;
+  protected float rotationSpeed = 20f;
   [SerializeField]
-  private Transform holdTransform;
+  protected Transform holdTransform;
   [SerializeField]
-  private Animator animator;
+  protected Animator animator;
 
-  private Dictionary<Direction, Vector3> directionMap;
-  private CharacterController controller;
-  private Vector3 leftRotation;
-  private Vector3 rightRotation;
+  protected Dictionary<Direction, Vector3> directionMap;
+  protected CharacterController controller;
+  protected Vector3 leftRotation;
+  protected Vector3 rightRotation;
 
-  void Start() {
+  protected virtual void Start() {
     controller = GetComponent<CharacterController>();
 
     leftRotation = new Vector3(0f, -10f, 0f);
@@ -39,7 +39,7 @@ public class ThirdPersonController : MonoBehaviour
     };
   }
 
-  public void Move (Direction direction) {
+  public virtual void Move (Direction direction) {
     if (directionMap.ContainsKey(direction)) {
         Vector3 vector = directionMap[direction] * Time.deltaTime;
 
@@ -77,7 +77,7 @@ public class ThirdPersonController : MonoBehaviour
     gameObject.SetActive(false);
   }
 
-  private IEnumerator StartSequence()
+  protected IEnumerator StartSequence()
   {
     yield return null;
     EventManager.TriggerEvent("spawn-end");

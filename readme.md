@@ -5,12 +5,12 @@
 - [Commands](#Commands)
 - [Projectiles](#Projectiles)
 
-### Installation
+# Installation
 
 - Clone Repo
 - Clone Utils
 
-### Setup
+# Setup
 
 * Create a Commander:
   * create an empty `GameObject`.
@@ -20,17 +20,31 @@
 * Create a Controller:
   * Attach the controller to the player object,  *i.e. TopDownController*.
 
-### Commanders
+# Commanders
 
 Commanders are used to map input to desired commands.
 They keep the input separate from the implementation.
 
-### Controllers
+# Controllers
 
 Controllers give controllable behavior to GameObjects.
 Controllers also require the Commands associated with them to be present on GameObject. Unity will add the required Commands for you.
 
-### Commands
+## ThirdPerson(Fixed)
+
+* ThirdPersonController
+  * Moves character relative to it's orientation.
+  * Forward moves the character in the direction they are facing
+  * Left rotates the character to the left (counter-clockwise)
+  * Requires `ThirdPersonLeft` & `ThirdPersonRight` commands
+
+* ThirdPersonFixedController
+  * Moves character relative to the camera.
+  * Forward moves the character north, relative to the camera
+  * Left moves the character west, relative to the camera
+  * Requires `ThirdPersonFixedLeft` & `ThirdPersonFixedRight` commands
+
+# Commands
 
 Commands are simple objects that contain instructions of how to use a controller. They map themselves to KeyCodes in the relevant InputCommander.
 
@@ -73,7 +87,7 @@ Requiring Command in relevant Controller:
 
 `[RequireComponent(typeof(Fire))]`
 
-### Projectiles
+# Projectiles
 
 *More Soon...*
 
