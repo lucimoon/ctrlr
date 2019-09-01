@@ -16,6 +16,8 @@ public class ThirdPersonController : MonoBehaviour
   private float rotationSpeed = 20f;
   [SerializeField]
   private Transform holdTransform;
+  [SerializeField]
+  private Animator animator;
 
   private Dictionary<Direction, Vector3> directionMap;
   private CharacterController controller;
@@ -56,7 +58,6 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void Interact () {
-
   }
 
   public void Hold () {
@@ -82,7 +83,12 @@ public class ThirdPersonController : MonoBehaviour
     EventManager.TriggerEvent("spawn-end");
   }
 
-  public void UpdateAnimationState(string name, bool value) {
+  public void UpdateAnimatorBool(string name, bool value) {
+    if (animator != null) {
+      animator.SetBool(name, value);
+    } else {
+      Debug.LogWarning("UpdateAnimatorBool: No Animator Attached");
+    }
   }
 }
 
