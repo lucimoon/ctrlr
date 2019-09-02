@@ -57,13 +57,13 @@ public class ThirdPersonController : MonoBehaviour
     }
   }
 
-  public void Interact () {
+  public virtual void Interact () {
   }
 
-  public void Hold () {
+  public virtual void Hold () {
   }
 
-  public void Emote() {
+  public virtual void Emote() {
   }
 
   public void Spawn()

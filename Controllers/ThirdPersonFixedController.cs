@@ -69,13 +69,13 @@ public class ThirdPersonFixedController : ThirdPersonController
     }
   }
 
-  public void Interact () {
+  public override void Interact () {
   }
 
-  public void Hold () {
+  public override void Hold () {
   }
 
-  public void Emote() {
+  public override void Emote() {
   }
 }
 
