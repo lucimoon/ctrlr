@@ -56,7 +56,6 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void Interact () {
-
   }
 
   public void Hold () {
