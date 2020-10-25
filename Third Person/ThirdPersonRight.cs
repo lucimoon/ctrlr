@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ThirdPersonRight : ThirdPersonCommand 
+public class ThirdPersonRight : ThirdPersonMove
 {
   public override void Execute()
   {
