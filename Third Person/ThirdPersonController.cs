@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(ThirdPersonBackward))]
-[RequireComponent(typeof(ThirdPersonForward))]
-[RequireComponent(typeof(ThirdPersonLeft))]
-[RequireComponent(typeof(ThirdPersonRight))]
-[RequireComponent(typeof(ThirdPersonInteract))]
 public class ThirdPersonController : MonoBehaviour
 {
   [SerializeField]
@@ -16,6 +11,9 @@ public class ThirdPersonController : MonoBehaviour
   private float rotationSpeed = 20f;
   [SerializeField]
   private Transform holdTransform;
+  
+  [SerializeField]
+  private Animator animator;
 
   private Dictionary<Direction, Vector3> directionMap;
   private CharacterController controller;
@@ -37,7 +35,7 @@ public class ThirdPersonController : MonoBehaviour
     };
   }
 
-  public void Move (Direction direction) {
+  public virtual void Move (Direction direction) {
     if (directionMap.ContainsKey(direction)) {
         Vector3 vector = directionMap[direction] * Time.deltaTime;
 
@@ -82,6 +80,9 @@ public class ThirdPersonController : MonoBehaviour
   }
 
   public void UpdateAnimationState(string name, bool value) {
+    if (animator != null) {
+      animator.SetBool(name, value);
+    }
   }
 }
 

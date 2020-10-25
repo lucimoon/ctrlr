@@ -10,10 +10,10 @@ public class ThirdPersonMove : ThirdPersonCommand
 
   public override void Execute()
   {
-    controller.UpdateAnimationState("isRunning", true);
+    controller.UpdateAnimationState("isMoving", true);
   }
 
   protected override void After() {
-    controller.UpdateAnimationState("isRunning", false);
+    controller.UpdateAnimationState("isMoving", false);
   }
 }
