@@ -1,3 +1,30 @@
+# CTRLR
+
+A framework for controlling video game entities.
+
+----
+
+## Contents
+
+* [Overview](#overview)
+* [Prerequesites](#prerequisites)
+* [Input](#input)
+* [Commanders](#commanders)
+* [Controllers](#controllers)
+* [Commands](#commands)
+* [Animation](#animation)
+* [Projectiles](#projectiles)
+
+---
+
+## Overview
+
+How does this work?
+
+*Coming soon...*
+
+---
+
 ## Prerequesites
 
 * Add an [EventManager](https://bitbucket.org/bitfieldgames/utils/src/master/) to the scene.
@@ -8,6 +35,8 @@
 
 Commanders are used to map input to desired commands.
 They keep the input separate from the implementation.
+
+---
 
 ## Commanders
 
@@ -22,7 +51,7 @@ To use a commander:
   * Attach the desired commander to the GameObject
   * TODO: Create a prefab to do this
 
-  ---
+---
 
 ## Controllers
 
@@ -82,7 +111,17 @@ Requiring Command in relevant Controller:
 
 `[RequireComponent(typeof(Fire))]`
 
-### Projectiles
+---
+
+## Animation
+
+A given `Controller` exposes an optional `Animator` property. You may attach an `Animator` in Unity's user interface.
+
+The base `Command` will then find the `Animator` on the `Controller` and expose it as `this.controller`. This gives you access to the `Animator` interface from any `Command` that inherits from the base `Command`.
+
+---
+
+## Projectiles
 
 *More Soon...*
 
