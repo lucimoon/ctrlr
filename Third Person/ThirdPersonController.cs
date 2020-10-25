@@ -38,24 +38,30 @@ public class ThirdPersonController : MonoBehaviour
   public virtual void Move (Direction direction) {
     if (directionMap.ContainsKey(direction)) {
         Vector3 vector = directionMap[direction] * Time.deltaTime;
+        Quaternion destinationRotation = Quaternion.identity;
 
       // TODO: make this a switch
       if (direction == Direction.forward) {
         controller.SimpleMove(Vector3.forward * movementSpeed);
-        // gameObject.transform = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+        destinationRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
       }
 
       if (direction == Direction.backward) {
         controller.SimpleMove(Vector3.back * movementSpeed);
+        destinationRotation = Quaternion.LookRotation(Vector3.back, Vector3.up);
       }
 
       if (direction == Direction.left) {
         controller.SimpleMove(Vector3.left * movementSpeed);
+        destinationRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
       }
       
       if (direction == Direction.right) {
         controller.SimpleMove(Vector3.right * movementSpeed);
+        destinationRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
       }
+      
+      transform.rotation = Quaternion.Lerp(transform.rotation, destinationRotation, Time.deltaTime * rotationSpeed);
     }
   }
 
